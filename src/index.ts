@@ -20,12 +20,26 @@ let obj: Obj3D;
 let ang: number=0;
 
 let countPestañaDeArriba = 0;
+let countPestañaDeArriba2 = 0;
+
 let countPestañaIzquierda = 0;
+let countPestañaIzquierda2 = 0;
+
 let countPestañaDerecha = 0;
+let countPestañaDerecha2 = 0;
+
 let countPestañaDeAbajoSegundo = 0;
+let countPestañaDeAbajoSegundo2 = 0;
+
 let countPestañaDeAbajoPrimero = 0;
+let countPestañaDeAbajoPrimero2 = 0;
+
 let maxClickPestañaDeArriba = 6;
+let maxClickPestañaDeArriba2 = 6;
+
 let maxClickPestañaDeAbajoPrimeroo = 18;
+
+let maxClickPestañaDeAbajoPrimero2 = 12;
 
 
 function leerArchivo(e:any) {
@@ -105,6 +119,19 @@ function PestañaDeArriba() {
 }
 }
 
+function PestañaDeArriba2() {
+  if (countPestañaDeArriba2 < maxClickPestañaDeArriba) {
+  let af = -15;
+	Rota3D.initRotate( obj.w[3], obj.w[4], af*Math.PI/180);	
+  for (let i = 1; i <= 2; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();
+  countPestañaDeArriba2++;
+}
+}
+
 function PestañaIzquierda() {
   if (countPestañaIzquierda < maxClickPestañaDeArriba) {
   let af = -15;
@@ -115,6 +142,19 @@ function PestañaIzquierda() {
 	cv.setObj(obj);
   cv.paint();	
   countPestañaIzquierda++;
+}
+}
+
+function PestañaIzquierda2() {
+  if (countPestañaIzquierda2 < maxClickPestañaDeArriba) {
+  let af = 15;
+	Rota3D.initRotate( obj.w[3], obj.w[5], af*Math.PI/180);	
+  for (let i = 7; i <= 8; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();	
+  countPestañaIzquierda2++;
 }
 }
 
@@ -131,6 +171,20 @@ function PestañaDerecha() {
 }
 }
 
+
+function PestañaDerecha2() {
+  if (  countPestañaDerecha2 < maxClickPestañaDeArriba) {
+  let af = -15;
+	Rota3D.initRotate( obj.w[4], obj.w[6], af*Math.PI/180);	
+  for (let i = 9; i <= 10; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();	
+  countPestañaDerecha2++;
+}
+}
+
 function PestañaDeAbajoPrimero() {
   if (  countPestañaDeAbajoPrimero < maxClickPestañaDeAbajoPrimeroo) {
   let af = -15;
@@ -141,6 +195,19 @@ function PestañaDeAbajoPrimero() {
 	cv.setObj(obj);
   cv.paint();	
   countPestañaDeAbajoPrimero++;
+}
+}
+
+function PestañaDeAbajoPrimero2() {
+  if (  countPestañaDeAbajoPrimero2 < maxClickPestañaDeAbajoPrimero2) {
+  let af = 15;
+	Rota3D.initRotate( obj.w[11], obj.w[12], af*Math.PI/180);	
+  for (let i = 13; i <= 14; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();	
+  countPestañaDeAbajoPrimero2++;
 }
 }
 
@@ -157,6 +224,36 @@ function PestañaDeAbajoSegundo() {
 }
 }
 
+function PestañaDeAbajoSegundo2() {
+  if (  countPestañaDeAbajoSegundo2 < maxClickPestañaDeArriba2) {
+  let af = 15;
+	Rota3D.initRotate( obj.w[5], obj.w[6], af*Math.PI/180);	
+  for (let i = 11; i <= 12; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();	
+  countPestañaDeAbajoSegundo2++ ;
+}
+}
+
+
+
+function Pestañasdeabajo() {
+ 
+  PestañaDeAbajoPrimero();
+  PestañaDeAbajoSegundo();
+  PestañaDeAbajoPrimero();
+}
+
+function todasLasPestañasDESARMAR() {
+  PestañaDeArriba2();
+  PestañaIzquierda2();
+  PestañaDerecha2();
+  PestañaDeAbajoPrimero2();
+  PestañaDeAbajoSegundo2();
+ 
+}
 
 function todasLasPestañas() {
   PestañaDeArriba();
@@ -177,6 +274,14 @@ function todasLasPestañas() {
     clearInterval(animation);
   }
 
+  let animationn;
+  function startAnimation2() {
+    animation = setInterval(todasLasPestañasDESARMAR, 300);
+  }
+  function stopAnimatio2() {
+    clearInterval(animation);
+  }
+
 document.getElementById('animacion').addEventListener('click',startAnimation, false);
 
 document.getElementById('todas').addEventListener('click',todasLasPestañas, false);
@@ -190,13 +295,14 @@ document.getElementById('incrDist').addEventListener('click', incrDistFunc, fals
 document.getElementById('decrDist').addEventListener('click', decrDistFunc, false);
 
 
-//movimiento de piezas
+//movimiento de piezas borrador del index 
+
+document.getElementById('desarmartodo').addEventListener('click', startAnimation2, false);
+document.getElementById('PestañasDeAbajo').addEventListener('click', Pestañasdeabajo, false);
 document.getElementById('PestañaArriba').addEventListener('click', PestañaDeArriba, false);
 document.getElementById('PestañaIzquierda').addEventListener('click', PestañaIzquierda, false);
 document.getElementById('PestañaDerecha').addEventListener('click',PestañaDerecha, false);
-document.getElementById('PestañaDeAbajoPrimero').addEventListener('click',PestañaDeAbajoPrimero, false);
-document.getElementById('PestañaDeAbajoSegundo').addEventListener('click',PestañaDeAbajoSegundo, false);
- 
+
 
 let Pix: number, Piy: number;
 let Pfx: number, Pfy: number;
