@@ -12,12 +12,19 @@ var cv;
 var obj;
 var ang = 0;
 var countPestañaDeArriba = 0;
+var countPestañaDeArriba2 = 0;
 var countPestañaIzquierda = 0;
+var countPestañaIzquierda2 = 0;
 var countPestañaDerecha = 0;
+var countPestañaDerecha2 = 0;
 var countPestañaDeAbajoSegundo = 0;
+var countPestañaDeAbajoSegundo2 = 0;
 var countPestañaDeAbajoPrimero = 0;
+var countPestañaDeAbajoPrimero2 = 0;
 var maxClickPestañaDeArriba = 6;
+var maxClickPestañaDeArriba2 = 6;
 var maxClickPestañaDeAbajoPrimeroo = 18;
+var maxClickPestañaDeAbajoPrimero2 = 12;
 function leerArchivo(e) {
     var archivo = e.target.files[0];
     if (!archivo) {
@@ -83,6 +90,18 @@ function PestañaDeArriba() {
         countPestañaDeArriba++;
     }
 }
+function PestañaDeArriba2() {
+    if (countPestañaDeArriba2 < maxClickPestañaDeArriba) {
+        var af = -15;
+        Rota3D.initRotate(obj.w[3], obj.w[4], af * Math.PI / 180);
+        for (var i = 1; i <= 2; i++) {
+            obj.w[i] = Rota3D.rotate(obj.w[i]);
+        }
+        cv.setObj(obj);
+        cv.paint();
+        countPestañaDeArriba2++;
+    }
+}
 function PestañaIzquierda() {
     if (countPestañaIzquierda < maxClickPestañaDeArriba) {
         var af = -15;
@@ -93,6 +112,18 @@ function PestañaIzquierda() {
         cv.setObj(obj);
         cv.paint();
         countPestañaIzquierda++;
+    }
+}
+function PestañaIzquierda2() {
+    if (countPestañaIzquierda2 < maxClickPestañaDeArriba) {
+        var af = 15;
+        Rota3D.initRotate(obj.w[3], obj.w[5], af * Math.PI / 180);
+        for (var i = 7; i <= 8; i++) {
+            obj.w[i] = Rota3D.rotate(obj.w[i]);
+        }
+        cv.setObj(obj);
+        cv.paint();
+        countPestañaIzquierda2++;
     }
 }
 function PestañaDerecha() {
@@ -107,6 +138,18 @@ function PestañaDerecha() {
         countPestañaDerecha++;
     }
 }
+function PestañaDerecha2() {
+    if (countPestañaDerecha2 < maxClickPestañaDeArriba) {
+        var af = -15;
+        Rota3D.initRotate(obj.w[4], obj.w[6], af * Math.PI / 180);
+        for (var i = 9; i <= 10; i++) {
+            obj.w[i] = Rota3D.rotate(obj.w[i]);
+        }
+        cv.setObj(obj);
+        cv.paint();
+        countPestañaDerecha2++;
+    }
+}
 function PestañaDeAbajoPrimero() {
     if (countPestañaDeAbajoPrimero < maxClickPestañaDeAbajoPrimeroo) {
         var af = -15;
@@ -117,6 +160,18 @@ function PestañaDeAbajoPrimero() {
         cv.setObj(obj);
         cv.paint();
         countPestañaDeAbajoPrimero++;
+    }
+}
+function PestañaDeAbajoPrimero2() {
+    if (countPestañaDeAbajoPrimero2 < maxClickPestañaDeAbajoPrimero2) {
+        var af = 15;
+        Rota3D.initRotate(obj.w[11], obj.w[12], af * Math.PI / 180);
+        for (var i = 13; i <= 14; i++) {
+            obj.w[i] = Rota3D.rotate(obj.w[i]);
+        }
+        cv.setObj(obj);
+        cv.paint();
+        countPestañaDeAbajoPrimero2++;
     }
 }
 function PestañaDeAbajoSegundo() {
@@ -130,6 +185,30 @@ function PestañaDeAbajoSegundo() {
         cv.paint();
         countPestañaDeAbajoSegundo++;
     }
+}
+function PestañaDeAbajoSegundo2() {
+    if (countPestañaDeAbajoSegundo2 < maxClickPestañaDeArriba2) {
+        var af = 15;
+        Rota3D.initRotate(obj.w[5], obj.w[6], af * Math.PI / 180);
+        for (var i = 11; i <= 12; i++) {
+            obj.w[i] = Rota3D.rotate(obj.w[i]);
+        }
+        cv.setObj(obj);
+        cv.paint();
+        countPestañaDeAbajoSegundo2++;
+    }
+}
+function Pestañasdeabajo() {
+    PestañaDeAbajoPrimero();
+    PestañaDeAbajoSegundo();
+    PestañaDeAbajoPrimero();
+}
+function todasLasPestañasDESARMAR() {
+    PestañaDeArriba2();
+    PestañaIzquierda2();
+    PestañaDerecha2();
+    PestañaDeAbajoPrimero2();
+    PestañaDeAbajoSegundo2();
 }
 function todasLasPestañas() {
     PestañaDeArriba();
@@ -147,6 +226,13 @@ function startAnimation() {
 function stopAnimation() {
     clearInterval(animation);
 }
+var animationn;
+function startAnimation2() {
+    animation = setInterval(todasLasPestañasDESARMAR, 300);
+}
+function stopAnimatio2() {
+    clearInterval(animation);
+}
 document.getElementById('animacion').addEventListener('click', startAnimation, false);
 document.getElementById('todas').addEventListener('click', todasLasPestañas, false);
 document.getElementById('file-input').addEventListener('change', leerArchivo, false);
@@ -156,12 +242,12 @@ document.getElementById('eyeLeft').addEventListener('click', eyeLeftFunc, false)
 document.getElementById('eyeRight').addEventListener('click', eyeRightFunc, false);
 document.getElementById('incrDist').addEventListener('click', incrDistFunc, false);
 document.getElementById('decrDist').addEventListener('click', decrDistFunc, false);
-//movimiento de piezas
+//movimiento de piezas borrador del index 
+document.getElementById('desarmartodo').addEventListener('click', startAnimation2, false);
+document.getElementById('PestañasDeAbajo').addEventListener('click', Pestañasdeabajo, false);
 document.getElementById('PestañaArriba').addEventListener('click', PestañaDeArriba, false);
 document.getElementById('PestañaIzquierda').addEventListener('click', PestañaIzquierda, false);
 document.getElementById('PestañaDerecha').addEventListener('click', PestañaDerecha, false);
-document.getElementById('PestañaDeAbajoPrimero').addEventListener('click', PestañaDeAbajoPrimero, false);
-document.getElementById('PestañaDeAbajoSegundo').addEventListener('click', PestañaDeAbajoSegundo, false);
 var Pix, Piy;
 var Pfx, Pfy;
 var theta = 0.3, phi = 1.3, SensibilidadX = 0.02, SensibilidadY = 0.02;
