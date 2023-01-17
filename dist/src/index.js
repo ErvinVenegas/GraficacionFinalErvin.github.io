@@ -25,6 +25,7 @@ var maxClickPestañaDeArriba = 6;
 var maxClickPestañaDeArriba2 = 6;
 var maxClickPestañaDeAbajoPrimeroo = 18;
 var maxClickPestañaDeAbajoPrimero2 = 12;
+var maxClickPestañaDeAbajoPrimero22 = 13;
 function leerArchivo(e) {
     var archivo = e.target.files[0];
     if (!archivo) {
@@ -163,7 +164,7 @@ function PestañaDeAbajoPrimero() {
     }
 }
 function PestañaDeAbajoPrimero2() {
-    if (countPestañaDeAbajoPrimero2 < maxClickPestañaDeAbajoPrimero2) {
+    if (countPestañaDeAbajoPrimero2 < maxClickPestañaDeAbajoPrimero22) {
         var af = 15;
         Rota3D.initRotate(obj.w[11], obj.w[12], af * Math.PI / 180);
         for (var i = 13; i <= 14; i++) {

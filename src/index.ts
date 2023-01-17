@@ -41,6 +41,7 @@ let maxClickPestañaDeAbajoPrimeroo = 18;
 
 let maxClickPestañaDeAbajoPrimero2 = 12;
 
+let maxClickPestañaDeAbajoPrimero22=13;
 
 function leerArchivo(e:any) {
   var archivo = e.target.files[0];
@@ -199,7 +200,7 @@ function PestañaDeAbajoPrimero() {
 }
 
 function PestañaDeAbajoPrimero2() {
-  if (  countPestañaDeAbajoPrimero2 < maxClickPestañaDeAbajoPrimero2) {
+  if (  countPestañaDeAbajoPrimero2 < maxClickPestañaDeAbajoPrimero22) {
   let af = 15;
 	Rota3D.initRotate( obj.w[11], obj.w[12], af*Math.PI/180);	
   for (let i = 13; i <= 14; i++){
